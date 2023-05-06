@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "translate",
+  "version": "1.0",
+  "icons": {
+    "16": "images/translate-16.png",
+    "32": "images/translate-32.png",
+    "48": "images/translate-48.png",
+    "128": "images/translate-128.png"
+  },
+  "action": {
+    "default_popup": "popup/setting.html",
+    "default_icon": "images/setting.svg"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "scripting",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "content_scripts": [
+    {
+      "js": ["translate/content.js"],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ]
+}

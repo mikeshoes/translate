@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+      "enable": {
+         "title": "enable this plugin",
+         "type": "boolean"
+      },
+      "to": {
+        "title": "language translate to",
+        "type": "string"
+      },
+    "detect_plugin": {
+        "title": "language detect plugin",
+        "type": "string"
+    }
+  }
+}

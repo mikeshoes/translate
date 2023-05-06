@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setting</title>
+    <link href="setting.css" type="text/css">
+</head>
+<body>
+    <div class="group">
+        <div class="item">
+            <div class="left"><label>是否使用翻译</label></div>
+            <div class="right"><span id="switch" class="switch off"></span></div>
+        </div>
+        <div class="item">
+            <div class="left"><label for="translate_to">翻译目标语言</label></div>
+            <div class="right">
+                <select id="translate_to">
+                    <option value="zh">中文</option>
+                    <option value="en">英文</option>
+                    <option value="ja">日文</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="setting.js"></script>
+</html>
