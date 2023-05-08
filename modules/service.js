@@ -28,6 +28,16 @@ let _BaiDuDetectLanguage = async (text) => {
     return result['lan'] || 'zh'
 }
 
+let _XfDetectLanguage = async (text) => {
+    let url = 'https://fanyi.xfyun.cn/api-tran/trans/detection?text=' + urlEncode(text)
+
+    let result = await request(url)
+
+    console.debug("application[translate]: detect origin lan [%s]", result['lan'])
+
+    return result.data || 'cn'
+}
+
 let _XfTranslate = async (text, from, to) => {
     let options = await config()
     let url = 'https://fanyi.xfyun.cn/api-tran/trans/its'
@@ -35,13 +45,15 @@ let _XfTranslate = async (text, from, to) => {
         .replace('[ssoSessionId]', options.xf_token.ssoSessionId)
         .replace('[accountId]', options.xf_token.accountId)
 
-    console.log(cookie, options)
-
     console.debug('application[translate]: origin text [%s] from [%s] to [%s]', text, from, to)
 
     let headers = {
-        'Content-type': 'application/x-www-form-urlencoded',
-        'Cookie': cookie
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json, text/plain, */*',
+        'Cache-Control': 'no-cache',
+        'Referer': 'https://fanyi.xfyun.cn/console/trans/text',
+        'Pragma': 'no-cache',
+        'Origin': 'https://fanyi.xfyun.cn'
     }
 
     let body = ["from=" + from, "to=" + to, "text=" + urlEncode(text)].join("&")
@@ -74,6 +86,9 @@ let translate = async (text) => {
     switch (options.detect_plugin) {
         case "baidu":
             org_lan = await _BaiDuDetectLanguage(text)
+            break
+        case 'xunfei':
+            org_lan = await _XfDetectLanguage(text)
             break
         default:
             org_lan = await _BaiDuDetectLanguage(text)

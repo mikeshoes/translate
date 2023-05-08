@@ -1,7 +1,7 @@
 let def_options = {
     enable: true,
-    to: 'zh',
-    detect_plugin: 'baidu',
+    to: 'cn',
+    detect_plugin: 'xunfei',
     xf_token: {
         ssoSessionId: '',
         accountId: ''
