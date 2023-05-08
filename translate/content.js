@@ -26,6 +26,7 @@ let init_dialog = (text) => {
         whiteSpace: 'normal',
         overflowWrap: 'break-word',
         position: 'fixed',
+        color: 'black',
         left: client.x + 'px',
         top: client.y + client.height + 'px'
     }
