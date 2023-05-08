@@ -12,6 +12,18 @@
     "detect_plugin": {
         "title": "language detect plugin",
         "type": "string"
+    },
+    "xf_token":{
+        "title": "language third token",
+        "type": "object",
+        "properties": {
+            "ssoSessionId": {
+                "type": "string"
+            },
+            "account_id": {
+              "type": "string"
+            }
+        }
     }
   }
 }

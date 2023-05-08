@@ -1,10 +1,10 @@
-import {init_storage, translate, config} from "./modules/service.js";
+import {translate} from "./modules/service.js";
+import {init_storage} from "./modules/config.js";
 
 // 监听安装事件
 chrome.runtime.onInstalled.addListener(details => {
     // 初始化application
     init_storage()
-
 })
 
 // 监听setting数据变化
@@ -19,21 +19,15 @@ chrome.runtime.onMessage.addListener(async (message, sender, callback) => {
     let response
     let error
 
-    switch (message.command) {
-        case "translate":
-            let options = await config()
-            let enable = Boolean(options['enable'])
-            if (!enable) {
-                error = 'not support'
+    try {
+        switch (message.command) {
+            // 翻译命令
+            case "translate":
+                response = await translate(message.text)
                 break
-            }
-
-            try {
-                response = await translate(message.text, options['to'], options)
-            } catch (e) {
-                error = e.message
-            }
-            break
+        }
+    } catch (e) {
+        error = e.message
     }
 
     let msg = {
@@ -44,7 +38,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, callback) => {
 
     // 通过事件进行传递数据
     if (sender.tab?.id) {
-        console.log(chrome.tabs)
         chrome.tabs.sendMessage(sender.tab.id, msg)
     }
 })
