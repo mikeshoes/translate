@@ -1,12 +1,12 @@
 let def_options = {
-    'enable': true,
-    'to': 'zh',
-    'detect_plugin': 'baidu',
-    'xf_token': {
-        'ssoSessionId': '',
-        'accountId': ''
+    enable: true,
+    to: 'zh',
+    detect_plugin: 'baidu',
+    xf_token: {
+        ssoSessionId: '',
+        accountId: ''
     },
-    'cache_size': 100
+    cache_size: 100
 }
 
 

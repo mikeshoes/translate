@@ -31,19 +31,25 @@ let _BaiDuDetectLanguage = async (text) => {
 let _XfTranslate = async (text, from, to) => {
     let options = await config()
     let url = 'https://fanyi.xfyun.cn/api-tran/trans/its'
-    let cookie = "ssoSessionId=[ssoSessionId];account_id=[accountId]"
+    let cookie = "ssoSessionId=[ssoSessionId]; account_id=[accountId]"
         .replace('[ssoSessionId]', options.xf_token.ssoSessionId)
         .replace('[accountId]', options.xf_token.accountId)
 
+    console.log(cookie, options)
+
     console.debug('application[translate]: origin text [%s] from [%s] to [%s]', text, from, to)
 
-    let headers = new Headers()
-    headers.append('Cookie', cookie)
-    headers.append('Content-type', 'application/x-www-form-urlencoded')
+    let headers = {
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Cookie': cookie
+    }
 
     let body = ["from=" + from, "to=" + to, "text=" + urlEncode(text)].join("&")
 
-    let result = await request(url, {headers, body: body, method: 'POST'})
+    let result = await request(url, {headers, body: body, method: 'POST', credentials: 'same-origin'})
+
+    console.log(result)
+
     if (!result.flag) {
         throw new Error("application[translate]: " + result.desc || 'no detail info')
     }

@@ -16,8 +16,6 @@ let translate = (text) => {
 let init_dialog = (text) => {
     let client = window.getSelection().getRangeAt(0).getClientRects().item(0)
 
-    console.log(window.getSelection().getRangeAt(0).getClientRects())
-
     let def_style = {
         cursor: 'pointer',
         border: 0,
@@ -29,7 +27,7 @@ let init_dialog = (text) => {
         overflowWrap: 'break-word',
         position: 'fixed',
         left: client.x + 'px',
-        top: client.y + 'px'
+        top: client.y + client.height + 'px'
     }
 
     let div = document.createElement("div")

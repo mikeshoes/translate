@@ -20,7 +20,7 @@
             "ssoSessionId": {
                 "type": "string"
             },
-            "account_id": {
+            "accountId": {
               "type": "string"
             }
         }

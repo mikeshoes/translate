@@ -11,8 +11,8 @@ let onContentLoaded = async () => {
 
     let {options} = await chrome.storage.sync.get('options')
     document.getElementById('translate_to').value = options.to
-    document.getElementById('ssoSessionId').innerText = options.xf_token.ssoSessionId
-    document.getElementById('accountId').innerText = options.xf_token.accountId
+    document.getElementById('ssoSessionId').value = options.xf_token.ssoSessionId
+    document.getElementById('accountId').value = options.xf_token.accountId
 }
 
 
@@ -22,7 +22,7 @@ let switchChange = async () => {
     let {options} = await chrome.storage.sync.get('options')
     options['enable'] = enable
 
-    chrome.storage.sync.set({options}).then(() => {
+    await chrome.storage.sync.set({options}).then(() => {
         console.log('设置启用成功')
     })
 }
@@ -39,11 +39,11 @@ let translateChange = async () => {
 }
 
 let token_set = async () => {
-    let ssoSessionId = document.getElementById('ssoSessionId').innerText
-    let accountId = document.getElementById('accountId').innerText
+    let ssoSessionId = document.getElementById('ssoSessionId').value
+    let accountId = document.getElementById('accountId').value
 
     let {options} = await chrome.storage.sync.get('options')
-    options['xf_token'] = {ssoSessionId, accountId}
+    options.xf_token = {ssoSessionId, accountId}
 
     chrome.storage.sync.set({options}).then(() => {
         console.log('设置讯飞翻译token成功')
@@ -58,9 +58,9 @@ document.getElementById('switch').onclick = switchChange
 
 document.getElementById('translate_to').onchange = translateChange
 
-document.getElementById('ssoSessionId').onblur = token_set
+document.getElementById('ssoSessionId').oninput = token_set
 
-document.getElementById('accountId').onblur = token_set
+document.getElementById('accountId').oninput = token_set
 
 
 
