@@ -27,6 +27,7 @@ let init_dialog = (text) => {
         overflowWrap: 'break-word',
         position: 'fixed',
         color: 'black',
+        zIndex: 999,
         left: client.x + 'px',
         top: client.y + client.height + 'px'
     }
@@ -67,7 +68,7 @@ let mouseup = (event) => {
     }
 }
 
-// 注入的js无法 监听页面加载完成
+// 注入的js需在document_start时 监听页面加载完成
 // document.addEventListener('DOMContentLoaded', content_loaded)
 // 鼠标抬起事件
 document.addEventListener('mouseup', mouseup)

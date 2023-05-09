@@ -31,7 +31,8 @@
       "js": ["translate/content.js"],
       "matches": [
         "*://*/*"
-      ]
+      ],
+      "all_frames": true
     }
   ]
 }
