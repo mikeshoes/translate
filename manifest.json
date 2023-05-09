@@ -10,7 +10,7 @@
   },
   "action": {
     "default_popup": "popup/setting.html",
-    "default_icon": "images/setting.svg"
+    "default_icon": "images/setting.png"
   },
   "permissions": [
     "storage",
