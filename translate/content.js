@@ -3,6 +3,7 @@ let getSelectText = () => {
 }
 
 let currentDialog
+let position
 
 let translate = (text) => {
     let message = {
@@ -14,7 +15,8 @@ let translate = (text) => {
 }
 
 let init_dialog = (text) => {
-    let client = window.getSelection().getRangeAt(0).getClientRects().item(0)
+    // 阻止iframe父页面响应listener
+    if (getSelectText().length <= 0) return
 
     let def_style = {
         cursor: 'pointer',
@@ -27,9 +29,10 @@ let init_dialog = (text) => {
         overflowWrap: 'break-word',
         position: 'fixed',
         color: 'black',
+        maxWidth: '400px',
         zIndex: 999,
-        left: client.x + 'px',
-        top: client.y + client.height + 'px'
+        left: Math.max(position.x - 50, 20) + 'px', // 优化位置尽可能对应
+        top: position.y + 10 + 'px'
     }
 
     let div = document.createElement("div")
@@ -65,6 +68,7 @@ let mouseup = (event) => {
     let text = getSelectText()
     if (text.length > 0) {
         translate(text)
+        position = {x: event.clientX, y: event.clientY}
     }
 }
 
